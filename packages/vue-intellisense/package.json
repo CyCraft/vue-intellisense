@@ -1,0 +1,25 @@
+{
+  "name": "vue-intellisense",
+  "version": "0.0.0-alpha.0",
+  "description": "A CLI tool to help enabling IntelliSense on your Vue components",
+  "author": "Luca Ban - Mesqueeb",
+  "main": "dist/index.cjs.js",
+  "scripts": {},
+  "keywords": [
+    "vue-intellisense",
+    "vue-autocomplete",
+    "vue-styleguidist",
+    "vetur",
+    "node",
+    "cli"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CyCraft/vue-intellisense#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CyCraft/vue-intellisense.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CyCraft/vue-intellisense/issues"
+  }
+}
