@@ -1,0 +1,27 @@
+{
+  "name": "vue-intellisense",
+  "private": true,
+  "author": "Luca Ban - Mesqueeb",
+  "scripts": {
+    "audit": "lerna-audit",
+    "test": "lerna run test",
+    "build": "npm run prepare && lerna run build && git add -A && git commit -m \"chore: build\"",
+    "publish": "npm run build && lerna publish",
+    "dep:install": "npm i && lerna bootstrap",
+    "dep:update-all": "ncu --semverLevel major -u && lerna exec 'ncu --semverLevel major -u' && npm run dep:install",
+    "dep:check-for-updates": "ncu --semverLevel major && lerna exec 'ncu --semverLevel major'",
+    "dep:reinstall-all": "rimraf node_modules && lerna clean -y && npm run dep:install"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/cycraft/vue-intellisense#readme",
+  "bugs": {
+    "url": "https://github.com/cycraft/vue-intellisense/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cycraft/vue-intellisense.git"
+  }
+}
