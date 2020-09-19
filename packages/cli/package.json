@@ -3,5 +3,16 @@
   "private": true,
   "version": "0.0.0-alpha.0",
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "meow": "^7.1.1"
+  },
+  "bin": {
+    "npm-name": "cli.js"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "cli.js"
+  ]
 }

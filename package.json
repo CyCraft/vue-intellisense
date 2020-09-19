@@ -5,7 +5,7 @@
   "scripts": {
     "audit": "lerna-audit",
     "test": "lerna run test",
-    "build": "npm run prepare && lerna run build && git add -A && git commit -m \"chore: build\"",
+    "build": "rollup -c ./build/buildScripts.js",
     "publish": "npm run build && lerna publish",
     "dep:install": "npm i && lerna bootstrap",
     "dep:update-all": "ncu --target minor -u && lerna exec 'ncu --target minor -u' && npm run dep:install",
@@ -16,6 +16,8 @@
   "devDependencies": {
     "lerna": "^3.22.1",
     "npm-check-updates": "^9.0.1",
+    "rollup": "^2.27.1",
+    "rollup-plugin-typescript2": "^0.27.2",
     "typescript": "^4.0.3"
   },
   "license": "MIT",
