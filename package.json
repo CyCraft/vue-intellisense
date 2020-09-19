@@ -10,11 +10,13 @@
     "dep:install": "npm i && lerna bootstrap",
     "dep:update-all": "ncu --target minor -u && lerna exec 'ncu --target minor -u' && npm run dep:install",
     "dep:check-for-updates": "ncu --target minor && lerna exec 'ncu --target minor'",
-    "dep:reinstall-all": "rimraf node_modules && lerna clean -y && npm run dep:install"
+    "dep:reinstall-all": "rimraf node_modules && lerna clean -y && npm run dep:install",
+    "test:scripts": "cd packages/scripts && npm run test"
   },
   "devDependencies": {
     "lerna": "^3.22.1",
-    "npm-check-updates": "^9.0.1"
+    "npm-check-updates": "^9.0.1",
+    "typescript": "^4.0.3"
   },
   "license": "MIT",
   "homepage": "https://github.com/cycraft/vue-intellisense#readme",
@@ -24,5 +26,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cycraft/vue-intellisense.git"
-  }
+  },
+  "dependencies": {}
 }

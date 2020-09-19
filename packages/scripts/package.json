@@ -1,0 +1,27 @@
+{
+  "name": "scripts",
+  "private": true,
+  "version": "0.0.0-alpha.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "ava"
+  },
+  "dependencies": {
+    "@planetar/vue-simple-docgen-loader": "^0.2.1",
+    "ava": "^3.12.1",
+    "case-anything": "^1.1.2",
+    "escodegen": "^2.0.0",
+    "is-what": "^3.11.2",
+    "to-ast": "^1.0.0",
+    "ts-node": "^9.0.0",
+    "vue-docgen-api": "^4.32.1"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}
