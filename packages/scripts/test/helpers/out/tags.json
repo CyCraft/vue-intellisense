@@ -1,0 +1,23 @@
+{
+  "blitz-form": {
+    "attributes": [
+      "value",
+      "id",
+      "schema",
+      "actionButtons",
+      "actionButtonDefaults",
+      "actionButtonsPosition",
+      "validator",
+      "columnCount",
+      "gridGap",
+      "lang",
+      "mode",
+      "labelPosition",
+      "evaluatedProps",
+      "internalLabels",
+      "internalErrors",
+      "internalErrorsFor"
+    ],
+    "description": "A BlitzForm"
+  }
+}

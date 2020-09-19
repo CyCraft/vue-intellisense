@@ -3,6 +3,7 @@
 </template>
 
 <script>
+/** A BlitzForm */
 export default {
   name: 'BlitzForm',
   props: {
