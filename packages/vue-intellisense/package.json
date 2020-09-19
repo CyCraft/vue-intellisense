@@ -26,8 +26,7 @@
     "chalk": "^4.1.0",
     "log-symbols": "^4.0.0",
     "meow": "^7.1.1",
-    "ora": "^5.1.0",
-    "scripts": "^0.0.0-alpha.1"
+    "ora": "^5.1.0"
   },
   "bin": {
     "vue-int": "cli.js"

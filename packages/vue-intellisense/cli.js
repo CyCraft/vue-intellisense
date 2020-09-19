@@ -4,7 +4,7 @@ const meow = require('meow')
 const logSymbols = require('log-symbols')
 const chalk = require('chalk')
 const ora = require('ora')
-const { generateVeturFiles } = require('scripts')
+const { generateVeturFiles } = require('./scripts')
 
 const cli = meow(`
 	Usage
