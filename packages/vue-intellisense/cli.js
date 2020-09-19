@@ -5,7 +5,7 @@ const logSymbols = require('log-symbols')
 const chalk = require('chalk')
 const ora = require('ora')
 const { isFullString } = require('is-what')
-const { generateVeturFiles } = require('./scripts/index.js')
+const { generateVeturFiles } = require('@vue-intellisense/scripts')
 
 const cli = meow(`
 	Usage
