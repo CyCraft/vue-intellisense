@@ -5,8 +5,9 @@
   "scripts": {
     "audit": "lerna-audit",
     "test": "lerna run test",
-    "build": "rollup -c ./build/buildScripts.js && git add -A && git commit -m \"chore: build\"",
-    "publish": "npm run build && lerna publish",
+    "build": "rollup -c ./build/buildScripts.js",
+    "build-and-commit": "npm run build && git add -A && git commit -m \"chore: build\"",
+    "publish": "npm run build-and-commit && lerna publish",
     "dep:install": "npm i && lerna bootstrap",
     "dep:update-all": "ncu --target minor -u && lerna exec 'ncu --target minor -u' && npm run dep:install",
     "dep:check-for-updates": "ncu --target minor && lerna exec 'ncu --target minor'",
