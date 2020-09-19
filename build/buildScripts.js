@@ -65,7 +65,6 @@ export default [
     output: [
       { file: 'packages/scripts/dist/index.cjs.js', format: 'cjs' },
       { file: 'packages/scripts/dist/index.esm.js', format: 'esm' },
-      { file: 'packages/vue-intellisense/scripts/index.js', format: 'cjs' },
     ],
   }),
 ]

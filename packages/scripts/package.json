@@ -1,7 +1,6 @@
 {
-  "name": "scripts",
-  "private": true,
-  "version": "0.0.0-alpha.1",
+  "name": "@vue-intellisense/scripts",
+  "version": "0.0.1-alpha.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
@@ -12,6 +11,10 @@
     "is-what": "^3.11.2",
     "vue-docgen-api": "^4.32.1"
   },
+  "devDependencies": {
+    "ava": "^3.12.1",
+    "rimraf": "^3.0.2"
+  },
   "ava": {
     "extensions": [
       "ts"
@@ -19,9 +22,5 @@
     "require": [
       "ts-node/register"
     ]
-  },
-  "devDependencies": {
-    "ava": "^3.12.1",
-    "rimraf": "^3.0.2"
   }
 }
