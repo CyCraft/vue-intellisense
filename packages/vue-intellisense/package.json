@@ -23,10 +23,13 @@
   },
   "gitHead": "7a52c73677fc5550368eb358a9775aea3fc69e0e",
   "dependencies": {
+    "case-anything": "^1.1.2",
     "chalk": "^4.1.0",
+    "is-what": "^3.11.2",
     "log-symbols": "^4.0.0",
     "meow": "^7.1.1",
-    "ora": "^5.1.0"
+    "ora": "^5.1.0",
+    "vue-docgen-api": "^4.32.1"
   },
   "bin": {
     "vue-int": "cli.js"

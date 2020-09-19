@@ -4,45 +4,43 @@ const meow = require('meow')
 const logSymbols = require('log-symbols')
 const chalk = require('chalk')
 const ora = require('ora')
-const { generateVeturFiles } = require('./scripts')
+const { isFullString } = require('is-what')
+const { generateVeturFiles } = require('./scripts/index.js')
 
 const cli = meow(`
 	Usage
-	  $ vue-int <name> …
-	Examples
-	  $ vue-int chalk
-	  ${logSymbols.error} ${chalk.bold('chalk')} is unavailable
-	  $ vue-int abc123
-	  ${logSymbols.warning} ${chalk.bold('abc123')} is squatted
-	  $ vue-int unicorn-cake
-	  ${logSymbols.success} ${chalk.bold('unicorn-cake')} is available
-	  $ vue-int @ava
-	  ${logSymbols.error} ${chalk.bold('@ava')} is unavailable
-	  $ vue-int @abc123
-	  ${logSymbols.success} ${chalk.bold('@abc123')} is available
-	  $ vue-int @sindresorhus/is unicorn-cake
-	  ${logSymbols.error} ${chalk.bold('@sindresorhus/is')} is unavailable
-	  ${logSymbols.success} ${chalk.bold('unicorn-cake')} is available
-	Exits with code 0 when all names are available or 2 when any names are taken
+	  $ vue-int --input <path> --output <path>
+  Examples
+    # target a specific Vue file to generate IntelliSense for
+    $ vue-int --output 'vetur' --input 'src/components/MyButton.vue'
+
+    # target all files in a folder - without nested folders
+    $ vue-int --output 'vetur' --input 'src/components'
+
+    # target all files in a folder - with nested folders
+    $ vue-int --output 'vetur' --input 'src/components' --recursive
+	Exits with code 0 when done or with 1 when an error has occured.
 `)
 
-const { input } = cli
+const { flags } = cli
+const { input, output } = flags
 
-if (input.length === 0) {
-  console.error('Specify one or more package names')
+if (!isFullString(input)) {
+  console.error('Specify an input: --input <some/path>')
+  process.exit(1)
+}
+if (!isFullString(output)) {
+  console.error('Specify an output: --output <some/path>')
   process.exit(1)
 }
 
-const spinner = ora(`Checking ${input.length === 1 ? 'name' : 'names'} on npmjs.com…`).start()
-
+const spinner = ora(`Generating files`).start()
 ;(async () => {
-  console.log(`input → `, input)
-  console.log(`output → `, output)
   await generateVeturFiles(input, output)
 
   spinner.stop()
 
-  console.log(`${logSymbols.success} done!`)
+  console.log(`${logSymbols.success} ${chalk.bold('done')}!`)
 
   process.exit(0)
 })().catch((error) => {
