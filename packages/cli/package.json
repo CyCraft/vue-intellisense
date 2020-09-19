@@ -1,7 +1,7 @@
 {
   "name": "cli",
   "private": true,
-  "version": "0.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "scripts": {},
   "dependencies": {
     "meow": "^7.1.1"
