@@ -8,8 +8,8 @@ const { isFullString } = require('is-what')
 const { generateVeturFiles } = require('@vue-intellisense/scripts')
 
 const cli = meow(`
-	Usage
-	  $ vue-int --input <path> --output <path>
+  Usage
+    $ vue-int --input <path> --output <path>
   Examples
     # target a specific Vue file to generate IntelliSense for
     $ vue-int --output 'vetur' --input 'src/components/MyButton.vue'
@@ -19,7 +19,7 @@ const cli = meow(`
 
     # target all files in a folder - with nested folders
     $ vue-int --output 'vetur' --input 'src/components' --recursive
-	Exits with code 0 when done or with 1 when an error has occured.
+  Exits with code 0 when done or with 1 when an error has occured.
 `)
 
 const { flags } = cli

@@ -9,11 +9,13 @@
   "dependencies": {
     "case-anything": "^1.1.2",
     "is-what": "^3.11.2",
+    "merge-anything": "^3.0.6",
     "vue-docgen-api": "^4.32.1"
   },
   "devDependencies": {
     "ava": "^3.12.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0"
   },
   "ava": {
     "extensions": [

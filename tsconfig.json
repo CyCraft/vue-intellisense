@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "strict": true,
-    "declaration": true,
-    "declarationDir": "./types/"
-  },
-  "include": ["src/**/*", "test/**/*"]
+    "strict": true
+  }
 }

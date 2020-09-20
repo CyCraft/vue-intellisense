@@ -2,10 +2,9 @@ import test from 'ava'
 import { generateVeturFiles } from '../src/index'
 const fs = require('fs')
 
-// vue-int --output 'vetur' --input 'src/components/MyButton.vue'
 test('h', async (t) => {
-  const input = 'test/helpers/BlitzForm.vue'
-  const output = 'test/helpers/out/'
+  const input = 'test/helpers'
+  const output = 'test/helpers/out'
   await generateVeturFiles(input, output)
   const outFileContents = {
     attributes: fs.readFileSync('test/helpers/out/attributes.json', 'utf8'),
@@ -77,6 +76,10 @@ test('h', async (t) => {
   "blitz-form/internalErrorsFor": {
     "type": "array",
     "description": "Pass the component names (without \`.vue\`) that have internal error handling. This makes sure it passes on props like \`rules\` and does nothing with them in the BlitzField."
+  },
+  "test/value": {
+    "type": "Record<string, any>",
+    "description": "The value!"
   }
 }`
   )
@@ -104,6 +107,12 @@ test('h', async (t) => {
       "internalErrorsFor"
     ],
     "description": "A BlitzForm"
+  },
+  "test": {
+    "attributes": [
+      "value"
+    ],
+    "description": "A Test"
   }
 }`
   )

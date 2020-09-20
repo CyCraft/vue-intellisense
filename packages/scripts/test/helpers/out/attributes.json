@@ -62,5 +62,9 @@
   "blitz-form/internalErrorsFor": {
     "type": "array",
     "description": "Pass the component names (without `.vue`) that have internal error handling. This makes sure it passes on props like `rules` and does nothing with them in the BlitzField."
+  },
+  "test/value": {
+    "type": "Record<string, any>",
+    "description": "The value!"
   }
 }

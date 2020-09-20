@@ -19,5 +19,11 @@
       "internalErrorsFor"
     ],
     "description": "A BlitzForm"
+  },
+  "test": {
+    "attributes": [
+      "value"
+    ],
+    "description": "A Test"
   }
 }
