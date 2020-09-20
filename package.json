@@ -7,14 +7,16 @@
     "test": "lerna run test",
     "build": "rollup -c ./build/buildScripts.js",
     "build-and-commit": "npm run build && git add -A && git commit -m \"chore: build\"",
-    "publish": "npm run build-and-commit && lerna publish",
+    "copy:readme": "copyfiles 'README.md' packages/vue-intellisense",
     "dep:install": "npm i && lerna bootstrap",
     "dep:update-all": "ncu --target minor -u && lerna exec 'ncu --target minor -u' && npm run dep:install",
     "dep:check-for-updates": "ncu --target minor && lerna exec 'ncu --target minor'",
     "dep:reinstall-all": "rimraf node_modules && lerna clean -y && npm run dep:install",
-    "test:scripts": "cd packages/scripts && npm run test"
+    "test:scripts": "cd packages/scripts && npm run test",
+    "publish": "npm run copy:readme && npm run build-and-commit && lerna publish"
   },
   "devDependencies": {
+    "copyfiles": "^2.3.0",
     "lerna": "^3.22.1",
     "npm-check-updates": "^9.0.1",
     "rollup": "^2.27.1",

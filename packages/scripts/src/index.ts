@@ -37,9 +37,16 @@ async function writeVeturFiles(
   fs.writeFileSync(_out + 'tags.json', JSON.stringify(tags, undefined, 2))
 }
 
-export async function generateVeturFiles(inputPath: string, outputPath: string): Promise<void> {
+export async function generateVeturFiles(
+  inputPath: string,
+  outputPath: string,
+  options?: { recursive?: boolean }
+): Promise<void> {
+  const { recursive } = options || {}
   const inputIsFile = ['.vue', '.jsx', '.tsx'].some((fileType) => inputPath.endsWith(fileType))
-  const allFiles = inputIsFile ? [inputPath] : await listFiles(inputPath, /\.vue|\.jsx|\.tsx/)
+  const allFiles = inputIsFile
+    ? [inputPath]
+    : await listFiles(inputPath, { regexFilter: /\.vue|\.jsx|\.tsx/, recursive })
   const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes')
   const tags = await vueFilePathsToVeturJsonData(allFiles, 'tags')
   await writeVeturFiles(outputPath, attributes, tags)

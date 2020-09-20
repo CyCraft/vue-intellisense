@@ -5,7 +5,7 @@ const fs = require('fs')
 test('h', async (t) => {
   const input = 'test/helpers'
   const output = 'test/helpers/out'
-  await generateVeturFiles(input, output)
+  await generateVeturFiles(input, output, { recursive: true })
   const outFileContents = {
     attributes: fs.readFileSync('test/helpers/out/attributes.json', 'utf8'),
     tags: fs.readFileSync('test/helpers/out/tags.json', 'utf8'),
