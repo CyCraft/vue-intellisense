@@ -24,6 +24,7 @@ test('vetur attributes', async (t) => {
       type: 'array',
       description:
         "Buttons on top of the form that control the 'mode' of the form. The possible pre-made buttons are:\n- 'edit' a button which puts the form in 'edit' mode & does `emit('edit')`\n- 'cancel' a button which puts the form in 'view' mode & does `emit('cancel')`\n- 'save' a button which puts the form in 'edit' mode & does `emit('save', {newData, oldData})`\n- 'delete' a red button which does `emit('delete')`\n- 'archive' a red button which does `emit('archive')`\n\nYou can also pass custom buttons with the same schema to generate forms.\n\nSee the documentation on \"Action Buttons\" for more info.",
+      options: ['cancel', 'save', 'delete', 'archive'],
     },
     'blitz-form/actionButtonDefaults': {
       type: 'object',
@@ -33,6 +34,7 @@ test('vetur attributes', async (t) => {
     'blitz-form/actionButtonsPosition': {
       type: 'string',
       description: 'The position of the action buttons.',
+      options: ['top', 'bottom', 'right', 'left'],
     },
     'blitz-form/validator': {
       type: 'function',
@@ -57,11 +59,13 @@ test('vetur attributes', async (t) => {
       type: 'string',
       description:
         'The mode represents how fields are rendered\n- "edit" or "add" means they can be interacted with\n- "view" means they can\'t\n- "raw" means the fields are not generated, just the raw value inside a div\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it\'s applied to all fields).',
+      options: ['edit', 'add', 'view', 'raw'],
     },
     'blitz-form/labelPosition': {
       type: 'string|function',
       description:
         "The position of the label in comparison to the field.\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it's applied to all fields).",
+      options: ['top', 'left'],
     },
     'blitz-form/evaluatedProps': {
       type: 'array',
@@ -110,6 +114,18 @@ test('vetur tags', async (t) => {
         'internalErrorsFor',
       ],
       description: 'A BlitzForm',
+    },
+  })
+})
+
+test('vetur attributes - options', async (t) => {
+  const input = 'test/helpers/other components/Test2.vue'
+  const result = await vueFilePathToVeturJsonData(input, 'attributes')
+  t.deepEqual(result as any, {
+    'test-2/value': {
+      type: 'string',
+      description: 'The value!',
+      options: ['a', 'b'],
     },
   })
 })

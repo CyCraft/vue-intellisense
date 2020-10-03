@@ -12,11 +12,27 @@ export function vueDocgenToVetur(
   const componentNameKebab = kebabCase(componentName)
   if (veturFile === 'attributes') {
     const props = vueDocgen.props || []
-    return props.reduce((carry: any, { name, description, type: _type }: any) => {
+    return props.reduce((carry: any, vueDocgenProp: any) => {
+      const { name, description, type: _type, values = [], tags: customTags = {} } = vueDocgenProp
       const attributeName = `${componentNameKebab}/${name}`
       const t = _type?.name || ''
       const type = t.endsWith('[]') ? 'array' : t.replace('func', 'function')
-      return { ...carry, [attributeName]: { type, description } }
+
+      // get the "options" from string literals
+      const _typeTags = customTags.type || []
+      const typeTags = _typeTags.map((t: any) => t.type.name)
+      const valuesCalculated = values.length
+        ? values
+        : typeTags.length
+        ? typeTags[0]
+            .split('|')
+            .map((t: string) => t.trim())
+            .filter((t: string) => t[0] === `'` && t[t.length - 1] === `'`)
+            .map((t: string) => t.slice(1, -1))
+        : []
+      const options = valuesCalculated.length ? { options: valuesCalculated } : {}
+
+      return { ...carry, [attributeName]: { type, description, ...options } }
     }, {})
   }
   if (veturFile === 'tags') {

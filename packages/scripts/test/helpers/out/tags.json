@@ -25,5 +25,11 @@
       "value"
     ],
     "description": "A Test"
+  },
+  "test-2": {
+    "attributes": [
+      "value"
+    ],
+    "description": "A Test"
   }
 }
