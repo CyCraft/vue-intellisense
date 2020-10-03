@@ -11,9 +11,38 @@ npm i -g vue-intellisense
 
 ## Usage
 
-### VSCode
+You'll need VSCode and Vetur installed.
 
-Vetur provides IntelliSense for Vue components. With this library you can automatically generate the required files for this to work.
+Vetur has a feature to get IntelliSense for your Vue components, however, you need to provide a bunch of config files for this.
+
+The Vue IntelliSense CLI generates the required files with zero-config required!
+
+### TLDR;
+
+Generate the required Vetur files for all your Vue components:
+
+```
+vue-int --input /src/components --output vetur --recursive
+```
+
+Then add this to your package.json:
+
+```json
+{
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  }
+}
+```
+
+That's it! 🎉
+
+### Motivation
+
+Check out the [blog post](https://medium.com/@lucaban/vue-intellisense-in-vscode-33cf8860e092)!
+
+### CLI Manual
 
 ```
 Usage
@@ -36,3 +65,7 @@ Examples
 
 Exits with code 0 when done or with 1 when an error has occured.
 ```
+
+### Contributing
+
+Any contribution welcome! Would love for this to work with other code editors as well!
