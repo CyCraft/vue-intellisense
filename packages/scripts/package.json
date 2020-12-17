@@ -8,14 +8,14 @@
   },
   "dependencies": {
     "case-anything": "^1.1.2",
-    "is-what": "^3.11.2",
-    "merge-anything": "^3.0.6",
-    "vue-docgen-api": "^4.32.1"
+    "is-what": "^3.12.0",
+    "merge-anything": "^4.0.0",
+    "vue-docgen-api": "^4.34.2"
   },
   "devDependencies": {
-    "ava": "^3.12.1",
+    "ava": "^3.14.0",
     "rimraf": "^3.0.2",
-    "ts-node": "^9.0.0"
+    "ts-node": "^9.1.1"
   },
   "ava": {
     "extensions": [
