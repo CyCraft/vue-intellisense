@@ -1,11 +1,9 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "strict": true,
     "declaration": true,
-    "declarationDir": "./types/",
-    "target": "es6",
-    "lib": ["ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020", "dom"]
+    "declarationDir": "./types/"
   },
   "include": ["src/**/*", "test/**/*"]
 }
