@@ -13,7 +13,7 @@
     "vue-docgen-api": "^4.34.2"
   },
   "devDependencies": {
-    "ava": "^3.14.0",
+    "ava": "^3.15.0",
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1"
   },
