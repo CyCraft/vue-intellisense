@@ -46,7 +46,11 @@ export async function generateVeturFiles(
   const inputIsFile = ['.vue', '.jsx', '.tsx'].some((fileType) => inputPath.endsWith(fileType))
   const allFiles = inputIsFile
     ? [inputPath]
-    : await listFiles(inputPath, { regexFilter: /\.vue|\.jsx|\.tsx/, recursive })
+    : await listFiles(inputPath, {
+        regexFilter: /\.vue|\.jsx|\.tsx/,
+        recursive,
+        resolvePaths: true,
+      })
   const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes')
   const tags = await vueFilePathsToVeturJsonData(allFiles, 'tags')
   await writeVeturFiles(outputPath, attributes, tags)
