@@ -1,15 +1,18 @@
 import { isPlainObject } from 'is-what'
 import { merge } from 'merge-anything'
-import { parse } from 'vue-docgen-api'
+import { parse, DocGenOptions } from 'vue-docgen-api'
 import { listFiles } from './listFiles'
 import { vueDocgenToVetur } from './vueDocgenToVetur'
 const fs = require('fs')
 
 export async function vueFilePathToVeturJsonData(
   vueFilePath: string,
-  veturFile: 'attributes' | 'tags'
+  veturFile: 'attributes' | 'tags',
+  options: { alias?: { [alias in string]: string }; [key: string]: any } = {}
 ): Promise<Record<string, any>> {
-  const vueDocgen = await parse(vueFilePath)
+  const { alias } = options
+  const docGenOptions: DocGenOptions | undefined = isPlainObject(alias) ? { alias } : undefined
+  const vueDocgen = await parse(vueFilePath, docGenOptions)
   if (!isPlainObject(vueDocgen)) return {}
   const jsonData = vueDocgenToVetur(vueDocgen, veturFile)
   return jsonData
@@ -17,10 +20,11 @@ export async function vueFilePathToVeturJsonData(
 
 async function vueFilePathsToVeturJsonData(
   inputPaths: string[],
-  veturFile: 'attributes' | 'tags'
+  veturFile: 'attributes' | 'tags',
+  options?: { alias?: { [alias in string]: string }; [key: string]: any }
 ): Promise<Record<string, any>> {
   const objects = await Promise.all(
-    inputPaths.map((path) => vueFilePathToVeturJsonData(path, veturFile))
+    inputPaths.map((path) => vueFilePathToVeturJsonData(path, veturFile, options))
   )
   if (!objects.length) throw '[vue-intellisense] missing <input paths>'
   return merge(objects[0], ...objects.slice(1))
@@ -40,7 +44,7 @@ async function writeVeturFiles(
 export async function generateVeturFiles(
   inputPath: string,
   outputPath: string,
-  options?: { recursive?: boolean }
+  options?: { recursive?: boolean; alias?: { [alias in string]: string } }
 ): Promise<void> {
   const { recursive } = options || {}
   const inputIsFile = ['.vue', '.jsx', '.tsx'].some((fileType) => inputPath.endsWith(fileType))
@@ -51,7 +55,7 @@ export async function generateVeturFiles(
         recursive,
         resolvePaths: true,
       })
-  const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes')
-  const tags = await vueFilePathsToVeturJsonData(allFiles, 'tags')
+  const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes', options)
+  const tags = await vueFilePathsToVeturJsonData(allFiles, 'tags', options)
   await writeVeturFiles(outputPath, attributes, tags)
 }
