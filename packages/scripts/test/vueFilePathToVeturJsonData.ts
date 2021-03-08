@@ -119,7 +119,7 @@ test('vetur tags', async (t) => {
 })
 
 test('vetur attributes - options', async (t) => {
-  const input = 'test/helpers/other components/Test2.vue'
+  const input = 'test/helpers/other components/nested/Test2.vue'
   const result = await vueFilePathToVeturJsonData(input, 'attributes')
   t.deepEqual(result as any, {
     'test-2/value': {
