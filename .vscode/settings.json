@@ -3,9 +3,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[vue]": {
-    "editor.defaultFormatter": "octref.vetur"
-  },
+  "[vue]": { "editor.defaultFormatter": "octref.vetur" },
   "[sass]": { "editor.defaultFormatter": "syler.sass-indented" },
   // Lerna monorepo related settings
   "eslint.workingDirectories": [{ "pattern": "./packages/*/" }],
@@ -25,6 +23,7 @@
   "editor.tabSize": 2, // make sure this is the same as .prettierrc
   "editor.insertSpaces": true,
   "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   // template/html
   "vetur.format.defaultFormatter.html": "prettier",
@@ -39,6 +38,5 @@
   "sass.format.convert": true,
   "sass.format.setPropertySpace": true,
   // typescript
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.enable": true
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
