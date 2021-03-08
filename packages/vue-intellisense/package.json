@@ -26,11 +26,11 @@
     "@vue-intellisense/scripts": "^0.2.0",
     "case-anything": "^1.1.2",
     "chalk": "^4.1.0",
-    "is-what": "^3.12.0",
+    "is-what": "^3.14.1",
     "log-symbols": "^4.0.0",
-    "meow": "^8.1.0",
-    "ora": "^5.2.0",
-    "vue-docgen-api": "^4.34.2"
+    "meow": "^8.1.2",
+    "ora": "^5.3.0",
+    "vue-docgen-api": "^4.35.0"
   },
   "bin": {
     "vue-int": "cli.js"
