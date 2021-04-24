@@ -20,13 +20,46 @@
     ],
     "description": "A BlitzForm"
   },
+  "BlitzForm": {
+    "attributes": [
+      "value",
+      "id",
+      "schema",
+      "actionButtons",
+      "actionButtonDefaults",
+      "actionButtonsPosition",
+      "validator",
+      "columnCount",
+      "gridGap",
+      "lang",
+      "mode",
+      "labelPosition",
+      "evaluatedProps",
+      "internalLabels",
+      "internalErrors",
+      "internalErrorsFor"
+    ],
+    "description": "A BlitzForm"
+  },
   "test": {
     "attributes": [
       "value"
     ],
     "description": "A Test"
   },
+  "Test": {
+    "attributes": [
+      "value"
+    ],
+    "description": "A Test"
+  },
   "test-2": {
+    "attributes": [
+      "value"
+    ],
+    "description": "A Test"
+  },
+  "Test2": {
     "attributes": [
       "value"
     ],

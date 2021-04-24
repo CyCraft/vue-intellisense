@@ -4,9 +4,9 @@ const meow = require('meow')
 const logSymbols = require('log-symbols')
 const chalk = require('chalk')
 const ora = require('ora')
-const { isFullString } = require('is-what')
+const { isFullString, isPlainObject } = require('is-what')
 const { generateVeturFiles } = require('@vue-intellisense/scripts')
-const at = require('lodash/at')
+const get = require('lodash/get')
 const merge = require('lodash/merge')
 const fs = require('fs')
 const path = require('path')
@@ -31,9 +31,11 @@ const cli = meow(
     # target all files in a folder - with nested folders
     $ vue-int --output 'vetur' --input 'src/components' --recursive
 
-    # target all files in a folder - with nested folders and some file using alias import
+    # target all files in a folder - with nested folders and and using alias for import
+    $ vue-int --output 'vetur' --input 'src/components' --recursive --alias alias.config.js other-alias.config.js
+
     # support nested object inside config file like: { resolve: { alias: { "@components": "/src/components" } } }
-    $ vue-int --output 'vetur' --input 'src/components' --recursive --alias webpack.config.js#resolve#alias
+    $ vue-int --output 'vetur' --input 'src/components' --recursive --alias webpack.config.js#resolve#alias other-alias.config.js
 
   Exits with code 0 when done or with 1 when an error has occured.
 `,
@@ -80,14 +82,12 @@ if (!isFullString(output)) {
  * @param {string} alias
  */
 function extractAliasPath(alias) {
-  const [configFilePath, ...aliasNested] = alias
-    .replace(/\/+/g, '/') // replace multiple '//..' with single '/' then  trim `/` `#`
-    .replace(/^\/+|\/+$|^#|#$/g, '')
-    .split('#')
-  const aliasAbsolutePath = path.resolve(process.cwd(), configFilePath)
+  const [configFilePath, ...aliasNested] = alias.replace(/^#|#$/g, '').split('#')
+  const aliasAbsolutePath = path.isAbsolute(configFilePath)
+    ? configFilePath
+    : path.resolve(__dirname, configFilePath)
   if (!fs.existsSync(aliasAbsolutePath)) {
-    console.error(`${configFilePath} is not found`)
-    process.exit(1)
+    throw new Error(`${aliasAbsolutePath} is not found`)
   }
   // not nested alias
   if (aliasNested.length === 0) {
@@ -106,27 +106,26 @@ function extractAliasPath(alias) {
  */
 function getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot) {
   const configFile = require(aliasAbsolutePath)
-  return at(configFile, nestedPropsByDot).shift() || null
-}
-
-if (!isFullString(output)) {
-  console.error('Specify an output: --output <some/path>')
-  process.exit(1)
+  if (!nestedPropsByDot) return configFile
+  return get(configFile, nestedPropsByDot) || null
 }
 
 // contain merged aliase of all file config
-const parsedAliase = {}
-
+let parsedAliase = {}
 alias.map((rawAlias) => {
-  const { aliasAbsolutePath, nestedPropsByDot } = extractAliasPath(rawAlias)
-  const extractedAliasObj = getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
-  if (!extractedAliasObj) {
-    console.error(`${rawAlias} is not contain alias config object`)
+  try {
+    const { aliasAbsolutePath, nestedPropsByDot } = extractAliasPath(rawAlias)
+
+    const extractedAliasObj = getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
+    if (!extractedAliasObj) {
+      throw new Error(`${rawAlias} is not contain alias config object`)
+    }
+    if (isPlainObject(extractedAliasObj)) parsedAliase = merge(parsedAliase, extractedAliasObj)
+  } catch (error) {
+    console.error(error)
     process.exit(1)
   }
-  return merge(parsedAliase, extractedAliasObj)
 })
-
 const spinner = ora(`Generating files`).start()
 ;(async () => {
   await generateVeturFiles(input, output, { recursive, alias: parsedAliase })
