@@ -14,13 +14,13 @@ function extractAliasPath(alias: string) {
   const [configFilePath, ...aliasNested] = alias.replace(/^#|#$/g, '').split('#')
   const aliasAbsolutePath = path.isAbsolute(configFilePath)
     ? configFilePath
-    : path.resolve(__dirname, configFilePath)
+    : path.resolve(process.cwd(), configFilePath)
   if (!fs.existsSync(aliasAbsolutePath)) {
     throw new Error(`[vue-intellisense] ${aliasAbsolutePath} is not found`)
   }
   // not nested alias
   if (aliasNested.length === 0) {
-    return { aliasAbsolutePath: configFilePath, nestedPropsByDot: '' }
+    return { aliasAbsolutePath, nestedPropsByDot: '' }
   }
   // example: resolve.alias
   const nestedPropsByDot = aliasNested.join('.')
@@ -40,21 +40,16 @@ function getAliasFromFilePath(aliasAbsolutePath: string, nestedPropsByDot: strin
 }
 
 function readAndParseAlias(rawAliases: string[]) {
-  let parsedAliase = {}
+  let parsedAliase: Record<string, string> = {}
   // contain merged aliase of all file config
   rawAliases.map((rawAlias: string) => {
-    try {
-      const { aliasAbsolutePath, nestedPropsByDot } = extractAliasPath(rawAlias)
+    const { aliasAbsolutePath, nestedPropsByDot } = extractAliasPath(rawAlias)
 
-      const extractedAliasObj = getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
-      if (!extractedAliasObj) {
-        throw new Error(`[vue-intellisense] ${rawAlias} is not contain alias config object`)
-      }
-      if (isPlainObject(extractedAliasObj)) parsedAliase = merge(parsedAliase, extractedAliasObj)
-    } catch (error) {
-      console.error(error)
-      process.exit(1)
+    const extractedAliasObj = getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
+    if (!extractedAliasObj) {
+      throw new Error(`[vue-intellisense] ${rawAlias} is not contain alias config object`)
     }
+    if (isPlainObject(extractedAliasObj)) parsedAliase = merge(parsedAliase, extractedAliasObj)
   })
   return parsedAliase
 }
@@ -71,8 +66,6 @@ function handleWarningMissingAlias() {
           '[vue-intellisense] Your aliases config is missing or wrong'
         )}!`
       )
-      console.error(message)
-      process.exit(1)
     }
   }
 }
