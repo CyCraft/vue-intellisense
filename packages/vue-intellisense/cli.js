@@ -137,7 +137,7 @@ const warn = console.warn
 console.warn = function (message, ...args) {
   warn.apply(console, args)
   if (['Neither', 'nor', 'or', 'could be found in'].every((msg) => message.includes(msg))) {
-    console.log(`${logSymbols.error} ${chalk.bold('Your aliases config is not missing or wrong')}!`)
+    console.log(`${logSymbols.error} ${chalk.bold('Your aliases config is missing or wrong')}!`)
     console.error(message)
     process.exit(1)
   }
