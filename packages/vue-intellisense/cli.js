@@ -20,7 +20,7 @@ const cli = meow(
     --output, -o  A folder to save the generated files.
     --input, -i  Either a Vue file, or a folder with vue components. In case it's a folder, it will not care about nested folders.
     --recursive, -r  consider all vue files in all nested folders as well.
-    --alias, -a A file contain alias config.
+    --alias, -a  List files contain aliases config.
   Examples
     # target a specific Vue file to generate IntelliSense for
     $ vue-int --output 'vetur' --input 'src/components/MyButton.vue'
@@ -126,6 +126,22 @@ alias.map((rawAlias) => {
     process.exit(1)
   }
 })
+
+// Make console.warn throw, so that we can check warning aliase config not correct
+const warn = console.warn
+/**
+ *
+ * @param {string} message
+ * @param  {...any[]} args
+ */
+console.warn = function (message, ...args) {
+  warn.apply(console, args)
+  if (['Neither', 'nor', 'or', 'could be found in'].every((msg) => message.includes(msg))) {
+    console.log(`${logSymbols.error} ${chalk.bold('Your aliases config is not missing or wrong')}!`)
+    console.error(message)
+    process.exit(1)
+  }
+}
 const spinner = ora(`Generating files`).start()
 ;(async () => {
   await generateVeturFiles(input, output, { recursive, alias: parsedAliase })
