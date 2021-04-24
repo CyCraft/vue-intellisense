@@ -1,9 +1,11 @@
-import { isPlainObject } from 'is-what'
+import { isFullArray, isPlainObject } from 'is-what'
 import { merge } from 'merge-anything'
 import { parse, DocGenOptions } from 'vue-docgen-api'
+import { readAndParseAlias, handleWarningMissingAlias } from './aliasUtils'
 import { listFiles } from './listFiles'
 import { vueDocgenToVetur } from './vueDocgenToVetur'
 const fs = require('fs')
+handleWarningMissingAlias()
 
 export async function vueFilePathToVeturJsonData(
   vueFilePath: string,
@@ -46,7 +48,7 @@ export async function generateVeturFiles(
   outputPath: string,
   options?: { recursive?: boolean; alias?: { [alias in string]: string } }
 ): Promise<void> {
-  const { recursive } = options || {}
+  const { recursive, alias } = options || {}
   const inputIsFile = ['.vue', '.jsx', '.tsx'].some((fileType) => inputPath.endsWith(fileType))
   const allFiles = inputIsFile
     ? [inputPath]
@@ -55,7 +57,15 @@ export async function generateVeturFiles(
         recursive,
         resolvePaths: true,
       })
-  const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes', options)
-  const tags = await vueFilePathsToVeturJsonData(allFiles, 'tags', options)
+  let parsedAliase = alias
+  if (isFullArray(alias)) parsedAliase = readAndParseAlias(alias)
+  const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes', {
+    ...options,
+    alias: parsedAliase,
+  })
+  const tags = await vueFilePathsToVeturJsonData(allFiles, 'tags', {
+    ...options,
+    alias: parsedAliase,
+  })
   await writeVeturFiles(outputPath, attributes, tags)
 }

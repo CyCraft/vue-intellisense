@@ -4,12 +4,8 @@ const meow = require('meow')
 const logSymbols = require('log-symbols')
 const chalk = require('chalk')
 const ora = require('ora')
-const { isFullString, isPlainObject } = require('is-what')
+const { isFullString } = require('is-what')
 const { generateVeturFiles } = require('@vue-intellisense/scripts')
-const get = require('lodash/get')
-const merge = require('lodash/merge')
-const fs = require('fs')
-const path = require('path')
 
 const cli = meow(
   `
@@ -77,74 +73,9 @@ if (!isFullString(output)) {
   process.exit(1)
 }
 
-/**
- * extract alias file config absolute path and nested property by dot
- * @param {string} alias
- */
-function extractAliasPath(alias) {
-  const [configFilePath, ...aliasNested] = alias.replace(/^#|#$/g, '').split('#')
-  const aliasAbsolutePath = path.isAbsolute(configFilePath)
-    ? configFilePath
-    : path.resolve(__dirname, configFilePath)
-  if (!fs.existsSync(aliasAbsolutePath)) {
-    throw new Error(`${aliasAbsolutePath} is not found`)
-  }
-  // not nested alias
-  if (aliasNested.length === 0) {
-    return { aliasAbsolutePath: configFilePath, nestedPropsByDot: '' }
-  }
-  // example: resolve.alias
-  const nestedPropsByDot = aliasNested.join('.')
-  return { aliasAbsolutePath, nestedPropsByDot }
-}
-
-/**
- *
- * @param {string} aliasAbsolutePath absolute path to alias file
- * @param {string} nestedObjectByDot nested alias object in config file
- * @returns
- */
-function getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot) {
-  const configFile = require(aliasAbsolutePath)
-  if (!nestedPropsByDot) return configFile
-  return get(configFile, nestedPropsByDot) || null
-}
-
-// contain merged aliase of all file config
-let parsedAliase = {}
-alias.map((rawAlias) => {
-  try {
-    const { aliasAbsolutePath, nestedPropsByDot } = extractAliasPath(rawAlias)
-
-    const extractedAliasObj = getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
-    if (!extractedAliasObj) {
-      throw new Error(`${rawAlias} is not contain alias config object`)
-    }
-    if (isPlainObject(extractedAliasObj)) parsedAliase = merge(parsedAliase, extractedAliasObj)
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
-  }
-})
-
-// Make console.warn throw, so that we can check warning aliase config not correct
-const warn = console.warn
-/**
- *
- * @param {string} message
- * @param  {...any[]} args
- */
-console.warn = function (message, ...args) {
-  warn.apply(console, args)
-  if (['Neither', 'nor', 'or', 'could be found in'].every((msg) => message.includes(msg))) {
-    console.log(`${logSymbols.error} ${chalk.bold('Your aliases config is missing or wrong')}!`)
-    console.error(message)
-    process.exit(1)
-  }
-}
 const spinner = ora(`Generating files`).start()
 ;(async () => {
-  await generateVeturFiles(input, output, { recursive, alias: parsedAliase })
+  await generateVeturFiles(input, output, { recursive, alias })
 
   spinner.stop()
 
