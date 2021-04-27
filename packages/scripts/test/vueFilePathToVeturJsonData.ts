@@ -87,6 +87,88 @@ test('vetur attributes', async (t) => {
       description:
         'Pass the component names (without `.vue`) that have internal error handling. This makes sure it passes on props like `rules` and does nothing with them in the BlitzField.',
     },
+    'BlitzForm/value': {
+      type: 'object',
+      description:
+        "An object with the data of the entire form. The object keys are the ids of the fields passed in the 'schema'.\n\nTo be used with `:value` or `v-model`.",
+    },
+    'BlitzForm/id': {
+      type: 'string',
+      description:
+        'A manually set \'id\' of the BlitzForm. This prop is accessible in the `context` (as `formId`) of any "evaluated prop" and event.\n\nRead more on Evaluated Props in its dedicated page.',
+    },
+    'BlitzForm/schema': {
+      type: 'array',
+      description:
+        "This is the heart of your BlitzForm. It's the schema that will defined what fields will be generated.",
+    },
+    'BlitzForm/actionButtons': {
+      type: 'array',
+      description:
+        "Buttons on top of the form that control the 'mode' of the form. The possible pre-made buttons are:\n- 'edit' a button which puts the form in 'edit' mode & does `emit('edit')`\n- 'cancel' a button which puts the form in 'view' mode & does `emit('cancel')`\n- 'save' a button which puts the form in 'edit' mode & does `emit('save', {newData, oldData})`\n- 'delete' a red button which does `emit('delete')`\n- 'archive' a red button which does `emit('archive')`\n\nYou can also pass custom buttons with the same schema to generate forms.\n\nSee the documentation on \"Action Buttons\" for more info.",
+      options: ['cancel', 'save', 'delete', 'archive'],
+    },
+    'BlitzForm/actionButtonDefaults': {
+      type: 'object',
+      description:
+        'You can overwrite the schema used for the default action buttons for edit, cancel, save, delete & archive.',
+    },
+    'BlitzForm/actionButtonsPosition': {
+      type: 'string',
+      description: 'The position of the action buttons.',
+      options: ['top', 'bottom', 'right', 'left'],
+    },
+    'BlitzForm/validator': {
+      type: 'function',
+      description:
+        'A function which serves as global validator for your form. It will receive the edited data as first param and the original data (before user edits) as second. It should return true if all is OK or a string with error message.',
+    },
+    'BlitzForm/columnCount': {
+      type: 'number',
+      description:
+        "The amount of columns the form should have.\n\nEach field can set a specific 'span' to be able to span multiple columns.",
+    },
+    'BlitzForm/gridGap': {
+      type: 'string',
+      description: 'The gap between each field in the form.',
+    },
+    'BlitzForm/lang': {
+      type: 'object',
+      description:
+        'The text used in the UI, eg. edit/save buttons etc... Pass an object with keys: archive, delete, cancel, edit, save.',
+    },
+    'BlitzForm/mode': {
+      type: 'string',
+      description:
+        'The mode represents how fields are rendered\n- "edit" or "add" means they can be interacted with\n- "view" means they can\'t\n- "raw" means the fields are not generated, just the raw value inside a div\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it\'s applied to all fields).',
+      options: ['edit', 'add', 'view', 'raw'],
+    },
+    'BlitzForm/labelPosition': {
+      type: 'string|function',
+      description:
+        "The position of the label in comparison to the field.\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it's applied to all fields).",
+      options: ['top', 'left'],
+    },
+    'BlitzForm/evaluatedProps': {
+      type: 'array',
+      description:
+        'An array with prop names that should be treated as "Evaluated Props" when passed a function.\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it\'s applied to all fields).',
+    },
+    'BlitzForm/internalLabels': {
+      type: 'boolean|undefined',
+      description:
+        "Set to true if the entire form has its own labels and you do not want the BlitzField to show a label.\n\nWhen `true` subLabels will be passed as a prop called 'hint'.\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it's applied to all fields).",
+    },
+    'BlitzForm/internalErrors': {
+      type: 'boolean|undefined',
+      description:
+        "Set to true if the entire form has its own error handling. This makes sure it passes on props like `rules` and does nothing with them in the BlitzField.\n\nThis prop can be set on a BlitzField or on a BlitzForm (in which case it's applied to all fields).",
+    },
+    'BlitzForm/internalErrorsFor': {
+      type: 'array',
+      description:
+        'Pass the component names (without `.vue`) that have internal error handling. This makes sure it passes on props like `rules` and does nothing with them in the BlitzField.',
+    },
   })
 })
 
@@ -115,6 +197,27 @@ test('vetur tags', async (t) => {
       ],
       description: 'A BlitzForm',
     },
+    BlitzForm: {
+      attributes: [
+        'value',
+        'id',
+        'schema',
+        'actionButtons',
+        'actionButtonDefaults',
+        'actionButtonsPosition',
+        'validator',
+        'columnCount',
+        'gridGap',
+        'lang',
+        'mode',
+        'labelPosition',
+        'evaluatedProps',
+        'internalLabels',
+        'internalErrors',
+        'internalErrorsFor',
+      ],
+      description: 'A BlitzForm',
+    },
   })
 })
 
@@ -123,6 +226,11 @@ test('vetur attributes - options', async (t) => {
   const result = await vueFilePathToVeturJsonData(input, 'attributes')
   t.deepEqual(result as any, {
     'test-2/value': {
+      type: 'string',
+      description: 'The value!',
+      options: ['a', 'b'],
+    },
+    'Test2/value': {
       type: 'string',
       description: 'The value!',
       options: ['a', 'b'],
