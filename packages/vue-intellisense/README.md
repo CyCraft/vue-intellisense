@@ -52,7 +52,6 @@ Options
   --output, -o  A folder to save the generated files.
   --input, -i  Either a Vue file, or a folder with vue components. In case it's a folder, it will not care about nested folders.
   --recursive, -r  consider all vue files in all nested folders as well.
-  --alias, -a  List files contain aliases config.
 
 Examples
   # target a specific Vue file to generate IntelliSense for
@@ -63,12 +62,6 @@ Examples
 
   # target all files in a folder - with nested folders
   $ vue-int --output 'vetur' --input 'src/components' --recursive
-
-  # target all files in a folder - with nested folders and and using alias for import
-  $ vue-int --output 'vetur' --input 'src/components' --recursive --alias alias.config.js other-alias.config.js
-
-  # support nested object inside config file like: { resolve: { alias: { "@components": "/src/components" } } }
-  $ vue-int --output 'vetur' --input 'src/components' --recursive --alias webpack.config.js#resolve#alias other-alias.config.js
 
 Exits with code 0 when done or with 1 when an error has occured.
 ```
