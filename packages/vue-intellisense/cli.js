@@ -17,6 +17,7 @@ const cli = meow(
     --input, -i  Either a Vue file, or a folder with vue components. In case it's a folder, it will not care about nested folders.
     --recursive, -r  consider all vue files in all nested folders as well.
     --alias, -a  List files contain aliases config.
+
   Examples
     # target a specific Vue file to generate IntelliSense for
     $ vue-int --output 'vetur' --input 'src/components/MyButton.vue'

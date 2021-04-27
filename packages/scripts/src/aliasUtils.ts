@@ -1,10 +1,10 @@
-const logSymbols = require('log-symbols')
-const chalk = require('chalk')
-const { isPlainObject } = require('is-what')
-const get = require('lodash/get')
-const merge = require('lodash/merge')
-const fs = require('fs')
-const path = require('path')
+import logSymbols from 'log-symbols'
+import chalk from 'chalk'
+import { isPlainObject } from 'is-what'
+import { merge } from 'merge-anything'
+import { getProp } from 'path-to-prop'
+import * as fs from 'fs'
+import * as path from 'path'
 
 /**
  * extract alias file config absolute path and nested property by dot
@@ -36,7 +36,7 @@ function extractAliasPath(alias: string) {
 function getAliasFromFilePath(aliasAbsolutePath: string, nestedPropsByDot: string) {
   const configFile = require(aliasAbsolutePath)
   if (!nestedPropsByDot) return configFile
-  return get(configFile, nestedPropsByDot) || null
+  return getProp(configFile, nestedPropsByDot) || null
 }
 
 function readAndParseAlias(rawAliases: string[]) {
