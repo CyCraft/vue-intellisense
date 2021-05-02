@@ -1,10 +1,10 @@
-const logSymbols = require('log-symbols')
-const chalk = require('chalk')
-const { isPlainObject } = require('is-what')
+import logSymbols from 'log-symbols'
+import chalk from 'chalk'
+import { isPlainObject } from 'is-what'
 import { merge } from 'merge-anything'
 import { getProp } from 'path-to-prop'
-const fs = require('fs')
-const path = require('path')
+import * as fs from 'fs'
+import * as path from 'path'
 import { isObject, isNullOrUndefined } from 'is-what'
 import { CompilerOptions } from 'typescript'
 
