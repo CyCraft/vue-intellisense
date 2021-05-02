@@ -1,10 +1,10 @@
 /**
  * @param {string} folderPath "resources/foo/goo"
  * @param {{
-    regexFilter?: RegExp,
-    resolvePaths?: boolean,
-    recursive?: boolean,
-  }} options
+ *   regexFilter?: RegExp,
+ *   resolvePaths?: boolean,
+ *   recursive?: boolean,
+ * }} options
  * regexFilter: RegExp - eg. /\.txt/ for only .txt files
  *
  * resolvePaths: boolean - when true it will return the _full_ path from the file system's root. If false (default) it will return the relativePath based on the initial directory path passed

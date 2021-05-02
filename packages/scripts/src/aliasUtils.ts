@@ -1,8 +1,8 @@
 const logSymbols = require('log-symbols')
 const chalk = require('chalk')
 const { isPlainObject } = require('is-what')
-const get = require('lodash/get')
-const merge = require('lodash/merge')
+import { merge } from 'merge-anything'
+import { getProp } from 'path-to-prop'
 const fs = require('fs')
 const path = require('path')
 import { isObject, isNullOrUndefined } from 'is-what'
@@ -83,7 +83,7 @@ function extractAliasPath(alias: string) {
 function getAliasFromFilePath(aliasAbsolutePath: string, nestedPropsByDot: string) {
   const configFile = require(aliasAbsolutePath)
   if (!nestedPropsByDot) return configFile
-  return get(configFile, nestedPropsByDot) || null
+  return getProp(configFile, nestedPropsByDot) || null
 }
 
 function readAndParseAlias(rawAliases: string[]) {

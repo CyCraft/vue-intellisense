@@ -4,7 +4,8 @@ import { parse, DocGenOptions } from 'vue-docgen-api'
 import { readAndParseAlias, handleWarningMissingAlias } from './aliasUtils'
 import { listFiles } from './listFiles'
 import { vueDocgenToVetur } from './vueDocgenToVetur'
-const fs = require('fs')
+import * as fs from 'fs'
+
 handleWarningMissingAlias()
 
 export async function vueFilePathToVeturJsonData(

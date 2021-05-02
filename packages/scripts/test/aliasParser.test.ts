@@ -1,7 +1,6 @@
 import test from 'ava'
 import { readAndParseAlias } from '../src/aliasUtils'
-const fs = require('fs')
-const path = require('path')
+import * as path from 'path'
 
 function resolveSrc(relativePath: string) {
   return path.resolve(process.cwd(), 'test/helpers/alias/' + relativePath)
