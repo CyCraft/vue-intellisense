@@ -94,3 +94,15 @@ test('conrrectly merged aliases in multiple file with some object path and witho
   const parsedAliases = readAndParseAlias(input)
   t.deepEqual(parsedAliases, expectValue)
 })
+
+test('conrrectly get aliases in (js|ts) config file', (t) => {
+  const input = ['test/helpers/alias/tsconfig.json']
+  const mapAliases: Record<string, string> = {
+    '@': '.',
+    '@src': './src',
+    '@components': './src/components',
+  }
+  const expectValue: Record<string, string> = getExpectValueForMapAliases(mapAliases)
+  const parsedAliases = readAndParseAlias(input)
+  t.deepEqual(parsedAliases, expectValue)
+})
