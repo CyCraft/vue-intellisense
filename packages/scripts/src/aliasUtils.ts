@@ -33,7 +33,7 @@ function readJsTsConfig(jsTsConfigPath: string) {
  */
 function pathsToAliasMapping(jsTsConfigPath = './tsconfig.json') {
   const jsTsConfig = readJsTsConfig(jsTsConfigPath)
-  if (!jsTsConfig) return {}
+  if (!jsTsConfig || !jsTsConfig.compilerOptions) return {}
   const { paths, baseUrl }: CompilerOptions = jsTsConfig.compilerOptions
 
   if (isObject(paths))
