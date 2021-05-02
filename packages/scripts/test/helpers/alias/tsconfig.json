@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@": ["./index.ts", "./index.json", "./index.vue", "./index.scss", "./index.css"],
+      "@src/*": ["./src/*"],
+      "@src": [
+        "./src/index.ts",
+        "./src/index.json",
+        "./src/index.vue",
+        "./src/index.scss",
+        "./src/index.css"
+      ],
+      "@components/*": ["./src/components/*"],
+      "@components": [
+        "./src/components/index.ts",
+        "./src/components/index.json",
+        "./src/components/index.vue",
+        "./src/components/index.scss",
+        "./src/components/index.css"
+      ]
+    }
+  }
+}
