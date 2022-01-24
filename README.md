@@ -1,5 +1,8 @@
 # Vue IntelliSense
 
+<a href="https://www.npmjs.com/package/vue-intellisense"><img src="https://img.shields.io/npm/v/vue-intellisense.svg" alt="Total Downloads"></a>
+<a href="https://www.npmjs.com/package/vue-intellisense"><img src="https://img.shields.io/npm/dw/vue-intellisense.svg" alt="Latest Stable Version"></a>
+
 > A CLI tool to help enabling IntelliSense on your Vue components
 
 ```shell

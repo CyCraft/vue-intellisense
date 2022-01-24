@@ -8,13 +8,13 @@
     "test": "rimraf test/helpers/out && ava"
   },
   "dependencies": {
-    "case-anything": "^1.1.2",
-    "chalk": "^4.1.1",
+    "case-anything": "^1.1.5",
+    "chalk": "^4.1.2",
     "is-what": "^3.14.1",
     "log-symbols": "^4.1.0",
-    "merge-anything": "^4.0.1",
+    "merge-anything": "^4.0.2",
     "path-to-prop": "^1.0.0",
-    "vue-docgen-api": "^4.35.0"
+    "vue-docgen-api": "^4.44.2"
   },
   "devDependencies": {
     "ava": "^3.15.0",
