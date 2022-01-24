@@ -2,6 +2,7 @@
   "name": "vue-intellisense",
   "private": true,
   "author": "Luca Ban - Mesqueeb",
+  "funding": "https://github.com/sponsors/mesqueeb",
   "scripts": {
     "audit": "lerna-audit",
     "test": "lerna run test",
