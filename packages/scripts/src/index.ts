@@ -59,7 +59,7 @@ export async function generateVeturFiles(
         resolvePaths: true,
       })
   let parsedAliase = alias
-  if (isFullArray(alias)) parsedAliase = readAndParseAlias(alias)
+  if (isFullArray(alias)) parsedAliase = await readAndParseAlias(alias)
   const attributes = await vueFilePathsToVeturJsonData(allFiles, 'attributes', {
     ...options,
     alias: parsedAliase,

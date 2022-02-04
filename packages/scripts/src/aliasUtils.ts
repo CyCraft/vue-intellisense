@@ -33,24 +33,24 @@ function extractAliasPath(alias: string) {
  * @param nestedPropsByDot like: resolve.alias
  * @returns
  */
-function getAliasFromFilePath(aliasAbsolutePath: string, nestedPropsByDot: string) {
-  const configFile = require(aliasAbsolutePath)
+async function getAliasFromFilePath(aliasAbsolutePath: string, nestedPropsByDot: string) {
+  const configFile = await import(aliasAbsolutePath)
   if (!nestedPropsByDot) return configFile
   return getProp(configFile, nestedPropsByDot) || null
 }
 
-function readAndParseAlias(rawAliases: string[]) {
+async function readAndParseAlias(rawAliases: string[]) {
   let parsedAliase: Record<string, string> = {}
   // contain merged aliase of all file config
-  rawAliases.map((rawAlias: string) => {
+  for (const rawAlias of rawAliases) {
     const { aliasAbsolutePath, nestedPropsByDot } = extractAliasPath(rawAlias)
 
-    const extractedAliasObj = getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
+    const extractedAliasObj = await getAliasFromFilePath(aliasAbsolutePath, nestedPropsByDot)
     if (!extractedAliasObj) {
       throw new Error(`[vue-intellisense] ${rawAlias} is not contain alias config object`)
     }
     if (isPlainObject(extractedAliasObj)) parsedAliase = merge(parsedAliase, extractedAliasObj)
-  })
+  }
   return parsedAliase
 }
 /**

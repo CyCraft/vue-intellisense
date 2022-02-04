@@ -1,10 +1,10 @@
-import test from 'ava'
+import { test, expect } from 'vitest'
 import { vueFilePathToVeturJsonData } from '../src/index'
 
-test('vetur attributes', async (t) => {
+test('vetur attributes', async () => {
   const input = 'test/helpers/BlitzForm.vue'
   const result = await vueFilePathToVeturJsonData(input, 'attributes')
-  t.deepEqual(result as any, {
+  expect(result).toEqual({
     'blitz-form/value': {
       type: 'object',
       description:
@@ -172,10 +172,10 @@ test('vetur attributes', async (t) => {
   })
 })
 
-test('vetur tags', async (t) => {
+test('vetur tags', async () => {
   const input = 'test/helpers/BlitzForm.vue'
   const result = await vueFilePathToVeturJsonData(input, 'tags')
-  t.deepEqual(result as any, {
+  expect(result).toEqual({
     'blitz-form': {
       attributes: [
         'value',
@@ -221,10 +221,10 @@ test('vetur tags', async (t) => {
   })
 })
 
-test('vetur attributes - options', async (t) => {
+test('vetur attributes - options', async () => {
   const input = 'test/helpers/other components/nested/Test2.vue'
   const result = await vueFilePathToVeturJsonData(input, 'attributes')
-  t.deepEqual(result as any, {
+  expect(result).toEqual({
     'test-2/value': {
       type: 'string',
       description: 'The value!',

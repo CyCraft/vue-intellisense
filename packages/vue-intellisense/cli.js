@@ -1,11 +1,10 @@
 #!/usr/bin/env node
-'use strict'
-const meow = require('meow')
-const logSymbols = require('log-symbols')
-const chalk = require('chalk')
-const ora = require('ora')
-const { isFullString } = require('is-what')
-const { generateVeturFiles } = require('@vue-intellisense/scripts')
+import meow from 'meow'
+import logSymbols from 'log-symbols'
+import chalk from 'chalk'
+import ora from 'ora'
+import { isFullString } from 'is-what'
+import { generateVeturFiles } from '@vue-intellisense/scripts'
 
 const cli = meow(
   `

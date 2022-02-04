@@ -1,8 +1,8 @@
-import test from 'ava'
+import { test, expect } from 'vitest'
 import { generateVeturFiles } from '../src/index'
-const fs = require('fs')
+import fs from 'fs'
 
-test('h', async (t) => {
+test('h', async () => {
   const input = 'test/helpers'
   const output = 'test/helpers/out'
   await generateVeturFiles(input, output, { recursive: true })
@@ -10,8 +10,7 @@ test('h', async (t) => {
     attributes: fs.readFileSync('test/helpers/out/attributes.json', 'utf8'),
     tags: fs.readFileSync('test/helpers/out/tags.json', 'utf8'),
   }
-  t.is(
-    outFileContents.attributes as string,
+  expect(outFileContents.attributes).toEqual(
     `{
   "blitz-form/value": {
     "type": "object",
@@ -212,8 +211,7 @@ test('h', async (t) => {
 }`
   )
 
-  t.is(
-    outFileContents.tags as string,
+  expect(outFileContents.tags).toEqual(
     `{
   "blitz-form": {
     "attributes": [
