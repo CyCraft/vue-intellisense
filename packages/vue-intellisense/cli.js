@@ -3,8 +3,10 @@ import meow from 'meow'
 import logSymbols from 'log-symbols'
 import chalk from 'chalk'
 import ora from 'ora'
-import { isFullString } from 'is-what'
-import { generateVeturFiles } from '@vue-intellisense/scripts'
+import IsWhat from 'is-what'
+const { isFullString } = IsWhat
+import VueIntellisenseScripts from '@vue-intellisense/scripts'
+const { generateVeturFiles } = VueIntellisenseScripts
 
 const cli = meow(
   `
