@@ -3,9 +3,9 @@ import meow from 'meow'
 import logSymbols from 'log-symbols'
 import chalk from 'chalk'
 import ora from 'ora'
-import IsWhat from 'is-what'
+import * as IsWhat from 'is-what'
 const { isFullString } = IsWhat
-import VueIntellisenseScripts from '@vue-intellisense/scripts'
+import * as VueIntellisenseScripts from '@vue-intellisense/scripts'
 const { generateVeturFiles } = VueIntellisenseScripts
 
 const cli = meow(
@@ -38,6 +38,7 @@ const cli = meow(
   Exits with code 0 when done or with 1 when an error has occured.
 `,
   {
+    importMeta: import.meta,
     flags: {
       input: {
         alias: 'i',

@@ -28,7 +28,7 @@ const plugins = [
     tsconfigOverride: {
       compilerOptions: {
         declaration: true,
-        declarationDir: 'packages/scripts/types/',
+        declarationDir: 'packages/scripts/dist/types/',
       },
       include: ['packages/scripts/src/**/*'],
       exclude: ['packages/scripts/test/**/*'],
@@ -62,9 +62,6 @@ function defaults(config) {
 export default [
   defaults({
     input: 'packages/scripts/src/index.ts',
-    output: [
-      { file: 'packages/scripts/dist/index.cjs.js', format: 'cjs' },
-      { file: 'packages/scripts/dist/index.esm.js', format: 'esm' },
-    ],
+    output: [{ file: 'packages/scripts/dist/index.esm.js', format: 'esm' }],
   }),
 ]

@@ -2,9 +2,9 @@
   "name": "@vue-intellisense/scripts",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/index.cjs.js",
+  "main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
-  "types": "types/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "test": "rimraf test/helpers/out && vitest --run"
   },
