@@ -54,7 +54,7 @@ export async function generateVeturFiles(
   const allFiles = inputIsFile
     ? [inputPath]
     : await listFiles(inputPath, {
-        regexFilter: /\.vue|\.jsx|\.tsx/,
+        regexFilter: /\.vue$|\.jsx$|\.tsx$/,
         recursive,
         resolvePaths: true,
       })
