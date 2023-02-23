@@ -1,6 +1,6 @@
 {
   "name": "vue-intellisense",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "A CLI tool to help enabling IntelliSense on your Vue components",
   "author": "Luca Ban - Mesqueeb",
@@ -24,7 +24,7 @@
   },
   "gitHead": "7a52c73677fc5550368eb358a9775aea3fc69e0e",
   "dependencies": {
-    "@vue-intellisense/scripts": "^1.0.1",
+    "@vue-intellisense/scripts": "^1.0.2",
     "case-anything": "^2.1.10",
     "chalk": "^5.0.0",
     "is-what": "^4.1.7",
